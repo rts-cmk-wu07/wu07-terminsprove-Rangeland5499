@@ -10,7 +10,7 @@ function App() {
           <MainRouter />
         </BrowserRouter>
       </div>
-    // </Provider>
+    </Provider>
   );
 }
 

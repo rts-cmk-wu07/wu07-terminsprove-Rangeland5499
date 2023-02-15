@@ -38,8 +38,8 @@ const Header = () => {
 
   return (
     <header className="flex justify-between pt-10">
-      <section className="flex justify-between mx-auto w-5/6 pb-4">
-      <BsTriangleFill className="text-gray" size={30}/>
+      <section className="flex justify-end mx-auto w-5/6 pb-4">
+      {/* <BsTriangleFill className="text-gray" size={30}/> */}
       <BiMenuAltRight
         className="text-gray"
         size={45}
@@ -56,7 +56,7 @@ const Header = () => {
           <section className="flex flex-col mx-auto justify-center text-center mt-20">
           <Link to={"/home"} className="pb-10 text-md">Home</Link>
           <Link to={"/search"} className="pb-10 text-md">Search</Link>
-          {userId && <Link to={"/schadule"} className="pb-10 text-md" >My Schadule</Link>}
+          {userId && <Link to={"/schadule"} className="pb-10 text-md" >My Schedule</Link>}
           {userId && (
             <p onClick={handleLogout} to={"/home"} className="text-md">
               Log out
