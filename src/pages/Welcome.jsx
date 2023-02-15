@@ -5,22 +5,19 @@ import welcome2 from "../Assets/welcome2.jpg";
 const Welcome = () => {
   const navigate = useNavigate();
   return (
-    <section  className="relative w-full h-full">
-      <article>
+    <section  className="relative w-full h-screen">
       
-      <img src={welcome1} alt="" />
-      <div className="absolute">
-      <p className="text-white text-xl">Believe Yourself</p>
+      <img src={welcome1} alt=""  className="h-1/2"/>
+      <div className="absolute right-1/3 bottom-80">
+      <p className="text-white text-xl pl-10">Believe Yourself</p>
       <div className="flex">
-      <hr className="w-1/6"></hr>
-      <p className="text-white text-sm">Train like a pro</p>
+      <hr className="w-1/6 items-center pb-40"></hr>
+      <p className="text-white text-sm pl-3">Train like a pro</p>
       </div>
       </div>
-      </article>
-      <article>
-      <img src={welcome2} alt="" />
-      <button className="absolute w-40 bg-white rounded-md" onClick={() => navigate("/home")}>Start Training</button>
-      </article>
+      <button className="absolute w-64 h-16 bottom-28 right-0 bg-white rounded-tl-lg rounded-bl-lg text-md" onClick={() => navigate("/home")}>Start Training</button>
+
+      <img src={welcome2} alt="" className="h-1/2" />
     </section>
   );
 };

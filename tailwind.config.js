@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors:{
         pink: "#F4A88E",
-        grey:"E4E4E4"
+        gray:"#E4E4E4"
     
       },
       fontSize: {
