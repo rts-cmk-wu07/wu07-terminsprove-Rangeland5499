@@ -41,7 +41,7 @@ It is a library which is used to make requests to an API, return data from the A
 ## Setup
 
 - Clone the repository
-- Run npm instal ( both trainer App and Trainer API.
+- Run npm install ( both trainer App and Trainer API.
 - Npm start [Trainer API](http://localhost:4000)
 - Instal libreries in Trainer App
 + Create folders:
