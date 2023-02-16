@@ -3,14 +3,16 @@ import { useContext, useState } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { BsTriangleFill } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 import { MainContext } from "../context/Provider";
+import BackBtn from "./BackButton";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const { setToken, userId, setUserId } = useContext(MainContext);
+  const { pathname } = useLocation();
   const [error, setError] = useState();
 
   const handleLogin = async (e) => {
@@ -40,11 +42,12 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between">
+    <header className="flex justify-between pr-8 pt-6">
       <section className="flex justify-between w-full items-center pb-4">
       {/* <BsTriangleFill className="text-gray" size={30}/> */}
+      {pathname !== "/home" && <BackBtn />}
       <BiMenuAltRight
-        className="text-gray ml-auto mr-8"
+        className="text-gray ml-auto mr-0"
         size={45}
         onClick={() => setNavigationOpen(!navigationOpen)}
       />
@@ -61,7 +64,7 @@ const Header = () => {
           <Link to={"/search"} className="pb-10 text-md">Search</Link>
           {userId && <Link to={"/schedule"} className="pb-10 text-md" >My Schedule</Link>}
           {userId && (
-            <p onClick={handleLogout} to={"/home"} className="text-md">
+            <p onClick={handleLogout} to={"/home"} className="text-md hover:font-bold">
               Log out
             </p>
           )}
