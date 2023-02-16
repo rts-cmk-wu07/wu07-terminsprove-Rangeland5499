@@ -11,7 +11,24 @@ const Provider = ({ children }) => {
   const handleGetClasses = async () => {
     try {
       const { data } = await axios.get("/api/v1/classes");
+      for (let item of data) {
+        item.rate = await getRating(item.id);
+      }
       setClasses(data);
+    } catch (err) {}
+  };
+
+  const getRating = async (id) => {
+    try {
+      const { data } = await axios.get(`/api/v1/classes/${id}/ratings`);
+      const ratings = data.map((item) => item.rating);
+      let sum = 0;
+
+      for (let rate of ratings) {
+        sum += rate;
+      }
+
+      return sum / ratings.length;
     } catch (err) {}
   };
 

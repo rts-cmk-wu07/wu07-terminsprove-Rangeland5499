@@ -11,6 +11,7 @@ const Header = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const { setToken, userId, setUserId } = useContext(MainContext);
+  const [error, setError] = useState();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +28,9 @@ const Header = () => {
 
       setUserId(data.userId);
       setToken(data.token);
-    } catch (err) {}
+    } catch (err) {
+      setError("username or password is wrong");
+    }
   };
 
   const handleLogout = () => {
@@ -37,26 +40,26 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between pt-10">
-      <section className="flex justify-end mx-auto w-5/6 pb-4">
+    <header className="flex justify-between">
+      <section className="flex justify-between w-full items-center pb-4">
       {/* <BsTriangleFill className="text-gray" size={30}/> */}
       <BiMenuAltRight
-        className="text-gray"
+        className="text-gray ml-auto mr-8"
         size={45}
         onClick={() => setNavigationOpen(!navigationOpen)}
       />
       </section>
       {navigationOpen && (
-        <div className="fixed h-full w-full flex flex-col bg-white z-[2001]">
+        <div className="fixed h-full w-full flex top-0 p-5 flex-col bg-white z-[2001]">
           <GrClose
             size={25}
             onClick={() => setNavigationOpen(!navigationOpen)}
-            className="text-gray flex justify-items-end"
+            className="text-[#E4E4E4] self-end"
           />
           <section className="flex flex-col mx-auto justify-center text-center mt-20">
           <Link to={"/home"} className="pb-10 text-md">Home</Link>
           <Link to={"/search"} className="pb-10 text-md">Search</Link>
-          {userId && <Link to={"/schadule"} className="pb-10 text-md" >My Schedule</Link>}
+          {userId && <Link to={"/schedule"} className="pb-10 text-md" >My Schedule</Link>}
           {userId && (
             <p onClick={handleLogout} to={"/home"} className="text-md">
               Log out
@@ -67,14 +70,15 @@ const Header = () => {
               <input
                 placeholder="username"
                 onChange={(e) => setUsername(e.target.value)}
-                className="mb-10 pb-6 bg-gray rounded-lg pl-4 pt-2"
+                className="mb-2 p-2 bg-gray rounded-lg border border-zinc-500"
               />
               <input
                 placeholder="password"
                 onChange={(e) => setPassword(e.target.value)}
-                className="mb-10 pb-6 bg-gray rounded-lg pl-4 pt-2"
+                className="mb-2 p-2 bg-gray rounded-lg border border-zinc-500"
               />
-              <button type="submit" className="text-md">Login</button>
+              {error && <p className="text-red-400">{error}</p>}
+              <button type="submit" className="text-md pt-4 hover:font-bold">Login</button>
             </form>
           )}
           </section>

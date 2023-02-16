@@ -9,8 +9,17 @@ body {
     margin: 0;
     font-family:"Arial";
   }
-/*   
-  img {
-    max-width: 600px;
-  } */
+
+  progress::-moz-progress-bar {
+    background: #f4a88e;
+    width: 100px;
+  }
+  progress::-webkit-progress-value {
+    background: #f4a88e;
+    width: 100px;
+  }
+  progress {
+    color: #f4a88e;
+    width: 100px;
+  }
   

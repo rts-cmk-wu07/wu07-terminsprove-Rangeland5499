@@ -1,23 +1,27 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import { MainContext } from "../context/Provider";
 import { BsFillCaretLeftFill } from "react-icons/bs";
-
+import Trainer from "../components/Trainer";
+import Rating from "react-rating";
 
 const ClassDetail = () => {
   const [detail, setDetail] = useState();
   const [trainerImageUrl, setTrainerImageUrl] = useState();
   const [userIsMember, setUserIsMember] = useState(false);
+  const [classRate, setClassRate] = useState(0);
+  const [errorRate, setErrorRate] = useState();
+
   const { userId, token } = useContext(MainContext);
 
   const { id } = useParams();
 
   const navigate = useNavigate();
-	const goBack = () => {
-		navigate(-1);
-	}
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const handleGetDetail = async (id) => {
     try {
@@ -33,6 +37,7 @@ const ClassDetail = () => {
 
   useEffect(() => {
     handleGetDetail(id);
+    getRating();
   }, []);
 
   const handleLeave = async () => {
@@ -55,38 +60,79 @@ const ClassDetail = () => {
     } catch (err) {}
   };
 
+  const handleRate = async (rate) => {
+    try {
+      const { data } = await axios.get(`/api/v1/classes/${id}/ratings`);
+      const userRate = data.find((item) => item.userId == userId);
+      if (userRate) {
+        setErrorRate("User already has rated.");
+        return;
+      }
+
+      const body = new URLSearchParams();
+      body.append("userId", userId);
+      body.append("rating", rate);
+
+      await axios.post(`/api/v1/classes/${id}/ratings`, body, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getRating();
+    } catch (err) {}
+  };
+
+  const getRating = async () => {
+    try {
+      const { data } = await axios.get(`/api/v1/classes/${id}/ratings`);
+      const ratings = data.map((item) => item.rating);
+      let sum = 0;
+
+      for (let rate of ratings) {
+        sum += rate;
+      }
+
+      setClassRate(sum / ratings.length);
+    } catch (err) {}
+  };
+
   return (
     <>
       {detail && (
         <div>
           <div className="relative">
-          <button className="absolute flex ml-12" onClick={goBack}>
-          <BsFillCaretLeftFill className=" text-pink text-sm mt-14"/>
-          <p className="text-pink pl-2 text-sm mt-12">Back</p>
-          </button>
-            <img src={detail.asset.url} alt="" className="h-[500px]"/>
-            <h2>{detail.className}</h2>
-            
+            <button className="absolute flex ml-12" onClick={goBack}>
+              <BsFillCaretLeftFill className=" text-pink text-sm mt-14" />
+              <p className="text-pink pl-2 text-sm mt-12">Back</p>
+            </button>
+            <img src={detail.asset.url} alt="" className="h-[480px]" />
+            <div className="absolute bottom-8 left-1 p-2">
+              <h2 className="text-white text-lg">{detail.className}</h2>
+              <div className="pb-12"><progress max={5} value={classRate}/></div>
+            </div>
+            <div className="pl-4"><Rating onChange={handleRate} /></div>
+            {errorRate && <p className="text-red-400 pl-6">{errorRate}</p>}
             {userId && (
               <button
-                className="absolute right-0 bottom-10 bg-white w-32 h-14 rounded-l-lg"
+                className="absolute right-0 bottom-16 bg-white w-32 h-14 rounded-l-lg"
                 onClick={() => (userIsMember ? handleLeave() : handleSignUp())}
               >
-               <p className="text-md">{userIsMember ? "Leave" : "SignUp"}</p> 
+                <p className="text-md">{userIsMember ? "Leave" : "SignUp"}</p>
               </button>
             )}
           </div>
-          <h2 className="text-md pl-6 pt-4">Schadule</h2>
+          <h2 className="text-md pl-6 pt-2">Schedule</h2>
           <div className="flex justify-between pb-6">
             <p className=" pl-6">{detail.classDay}</p>
             <p className="pr-6">{detail.classTime}</p>
           </div>
           <p className="pl-6">{detail.classDescription}</p>
-          <h2 className="pl-6 pt-4 text-md">Trainer</h2>
-          <div className="flex">
-            <img src={trainerImageUrl} alt=""  className="h-[90px] w-[90px] rounded-lg ml-8"/>
-            <p className="ml-4 mt-4 text-sm">{detail.trainer.trainerName}</p>
-          </div>
+          <h2 className="pl-6 pt-2 text-md">Trainer</h2>
+          <Trainer
+            trainerImageUrl={trainerImageUrl}
+            trainerName={detail.trainer.trainerName}
+          />
         </div>
       )}
     </>

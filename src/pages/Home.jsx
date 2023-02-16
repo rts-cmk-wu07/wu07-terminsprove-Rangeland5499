@@ -31,24 +31,22 @@ const Home = () => {
 
   return (
     <div>
+      <h2 className="flex justify-center text-md pt-4 ">Popular Classes</h2>
       <Header />
-      <p className="flex justify-center text-md" style={{paddingTop:"-20px"}}>Popular Classes</p>
-      <section className="">
+      <section>
       {classes && (
         <Link to={`/class/${randomClass.id}`}>
+          <div className="relative w-[340px] h-[400px] mx-auto">
         <img
           src={randomClass?.asset.url}
-          className="w-[340px] justify-center mx-auto rounded-lg h-[400px]"
-          alt=""/>
-        <h2 className="pl-10">{randomClass.className}</h2>
+          className="rounded-lg h-full w-full" alt=""/>
+        <h3 className="pl-10 absolute bottom-4 left-2 text-white font-bold text-4xl">{randomClass.className}</h3>
+        </div>
         </Link>
       )}
-      
-      
       </section>
-      
-       
-      <h1 className="text-md pl-6 pb-8">Classes For You</h1>
+    
+      <h2 className="text-md pl-6 pb-12 te">Classes For You</h2>
       <div className=" justify-center pl-6 pr-0 rounded-lg ">
       <Carousel responsive={responsive} >
         {classes.map((item) => (
@@ -57,6 +55,7 @@ const Home = () => {
             id={item.id}
             url={item.asset.url}
             className={item.className}
+            rate={item.rate}
           />
         ))}
       </Carousel>
