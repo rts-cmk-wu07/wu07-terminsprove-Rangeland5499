@@ -65,7 +65,7 @@ const ClassDetail = () => {
       const { data } = await axios.get(`/api/v1/classes/${id}/ratings`);
       const userRate = data.find((item) => item.userId == userId);
       if (userRate) {
-        setErrorRate("User already has rated.");
+        setErrorRate("The user already has rated.");
         return;
       }
 
@@ -122,13 +122,13 @@ const ClassDetail = () => {
               </button>
             )}
           </section>
-          <h2 className="text-md pl-6 pt-2 font-bold">Schedule</h2>
+          <h2 className="text-md pl-6  font-bold">Schedule</h2>
           <div className="flex justify-between pb-6">
             <p className=" pl-6">{detail.classDay}</p>
             <p className="pr-6">{detail.classTime}</p>
           </div>
           <p className="pl-6">{detail.classDescription}</p>
-          <h2 className="pl-6 pt-2 text-md font-bold">Trainer</h2>
+          <h2 className="pl-6 text-md font-bold">Trainer</h2>
           <Trainer
             trainerImageUrl={trainerImageUrl}
             trainerName={detail.trainer.trainerName}

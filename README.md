@@ -1,26 +1,35 @@
 # Project Title
 
 ### Trainer app
+
+<br>
+
 ## About the Project:
 The Trainer mobile app gets some data about the available classes with some details from the [Trainer API](http://localhost:4000) as backend.
 In the app, people can log in as users. After login there is a sign up button with the option to leave the classes. 
 There is also a page that shows the classes that the user has selected, with the date and time.
+
+<br>
 
 ## Technologies
 - ##### HTML
 - ##### CSS
 - ##### JavaScript
 
-### Framework
+<br>
+
+### `Framework`
 
 - ##### React :
 The React. js framework is an open-source JavaScript framework and library developed by Facebook.
    It's used for building interactive user interfaces and web applications quickly and efficiently with significantly less code than you would with vanilla JavaScript. 
 
+<br>
 
-### Libraries 
+### `Libraries` 
 - ##### TailwindCSS : 
 Tailwind CSS works by scanning all of your HTML files, JavaScript components, and any other templates for class names, generating the corresponding styles and then writing them to a static CSS file.
+
 
 - ##### React Router :
 React Router is the most popular routing library in React. Routing is a process in which a user is directed to different pages based on their action or request.
@@ -38,20 +47,58 @@ An advanced slideshow component for cycling through images with a selectable num
 - #### Axios :
 It is a library which is used to make requests to an API, return data from the API, and then do things with that data in our React application.
 
-## Setup
+
+<br>
+
+ ### `React Hooks` :
+- #### useState :  
+ The most common hook is useState. It lets us keep local state in a function component and returns a pair of values: the current state and a function that updates it. The useState Hook can be used to keep track of strings, numbers, booleans, arrays, objects, and any combination of these!(const [schedules, setSchedules] = useState([]);)
+ - #### useEffect :
+ The useEffect Hook allows to perform side effects in the components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional.(useEffect(function, dependency))
+
+ - #### useContext :
+ React Context is a way to manage state globally. In order to use the Context in a child component, we need to access it using the useContext Hook. 
+
+ - #### useNavigate :
+ useNavigate is a hook that allows to create a function that'll help a user navigate to a particular page (based on an action). We can customize it to redirect the user to the login page or user Dashboard.
+
+ - #### useLocation :
+ useLocation is hook that allows to get the current location(or URL) of the web app.
+
+ - #### useParams :
+ The useParams hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the Route path .
+
+ <br>
+
+## Installation and Setup Instructions
 
 - Clone the repository
-- Run npm instal ( both trainer App and Trainer API.
-- Npm start [Trainer API](http://localhost:4000)
-- Instal libreries in Trainer App
-+ Create folders:
-   + Pages : Welcome, Home, ClassDetail, Schedules, Search, 
+- Run npm install ( both in the trainer App and Trainer API.
+- Npm start [Trainer API](https://github.com/rts-cmk-opgaver/trainer-api)
+- Install libraries in Trainer App
+- Npm start (Trainer App)
++ Create folders (Code Splitting-Modules):
+   + Pages : Welcome, Home, ClassDetail, Schedules, Search.
+
+      <br>
    + Components: MainRouter, Header, Trainer, Class, BackBTN
+       + (*Components are independent and reusable bits of code. They serve the same purpose as JavaScript functions, but work in isolation and return HTML.) 
+      <br> 
    + Context : Provider
+        + (*React context provides data to components no matter how deep they are in the components tree. The context is used to manage global data, e.g. global state, theme, services, user settings, and more.)
+
+        <br>
+
+- The app has been adapted to the screen size of iPhone 12 pro.
+
+
+    
 
 
 
-
+<br>
+<br>
+<br>
 
 # Getting Started with Create React App
 
