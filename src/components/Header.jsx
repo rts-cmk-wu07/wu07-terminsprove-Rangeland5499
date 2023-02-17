@@ -35,7 +35,7 @@ const Header = () => {
       });
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
-      //Setting the user ID and password to localStorage to use the next time the user opens the app.
+      //Setting the user ID and password to localStorage to use the next time  when the user opens the app.
 
       setUserId(data.userId);
       setToken(data.token);

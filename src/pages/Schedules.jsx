@@ -5,11 +5,15 @@ import Header from "../components/Header";
 
 const Schedules = () => {
   const { token, userId } = useContext(MainContext);
+  //access token and user id with useContext for API requests.
 
   const [schedules, setSchedules] = useState([]);
+  //showing the schedules with useState for creating an array state variable.
 
   const handleGetUser = async () => {
+    //function for getting the user schedule.
     try {
+      // api call
       const { data } = await axios.get(`/api/v1/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -17,6 +21,8 @@ const Schedules = () => {
     } catch (err) {}
   };
 
+  //After the first rendering, 
+  //if the user is logged in, we give the schedule to the user.
   useEffect(() => {
     if (token && token.length > 0) {
       handleGetUser();
@@ -29,6 +35,8 @@ const Schedules = () => {
       <h1 className="text-lg pt-10 pl-10 font-bold pb-8">My Schedule</h1>
       <section className="h-[550px] overflow-y-scroll pl-2 pt-6">
 
+      {/* mapping over schedules array(state) and
+       displaying the classDay, classTime and className. */}
       {schedules.map((item) => (
         <div
           key={item.id}
@@ -40,7 +48,7 @@ const Schedules = () => {
             <p className="pr-10 pt-8 text-sm">{item.classTime}</p>
           </div>
 
-          <p className="pl-10 pt-4 text-md pb-10 font-bold pb-2">{item.className}</p>
+          <p className="pl-10 pt-4 text-md pb-2 font-bold">{item.className}</p>
         </div>
       ))}
       </section>
